@@ -1,0 +1,19 @@
+${dataArray.map(albums => 
+    `<p>${albums.artist} - ${albums.name} - ${albums.genre}</p>`).join("")}
+
+
+    ${reviewArray.map(review => 
+        `<div class="callout"> <div class="grid-container"><div class="cell small-4"><p>${review.stars} ${review.username} ${review.review}</p></div></div></div>`).join("")}
+
+
+<form action="/" method="POST">
+    <input type="hidden" value="1" name="user_id">
+   <input type="hidden" value=${dataArray[0].id} name="album_id">
+    <label> Title: 
+        <input type="text" name="review_title" placeholder="Review Title">
+    </label>
+    <label> Text: 
+        <textarea name="review_review" placeholder="Review Text"></textarea>
+    </label>
+    <button class="button" type="submit">Save Review</button>
+</form>
