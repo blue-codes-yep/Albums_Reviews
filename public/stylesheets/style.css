@@ -1,7 +1,50 @@
+
+
 body {
 
 }
 
 a {
   color: #00B7FF;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+    width: 100%;
+    max-width: 1000px;
+    margin: 10px auto;
+}
+
+.top-bar a {
+    margin-left: 3px;
+    margin-right: 3px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.top-bar-left a:nth-child(1) {
+    background-color: grey;
+}
+
+.top-bar-left a:nth-child(1):hover {
+    background-color: rgb(92, 91, 91);
+}
+
+.top-bar-right a:nth-child(1) {
+    background-color: #00B7FF;
+}
+
+.top-bar-right a:nth-child(1):hover {
+    background-color: rgb(131, 198, 224);
+    color: black;
+}
+
+.top-bar-right a:nth-child(2) {
+    background-color: rgb(20, 117, 155);
+}
+
+.top-bar-right a:nth-child(2):hover {
+    background-color: rgb(131, 198, 224);
+    color: black;
 }

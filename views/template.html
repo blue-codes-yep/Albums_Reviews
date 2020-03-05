@@ -11,9 +11,21 @@
         <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.1/dist/js/foundation.min.js"></script>
     </head>
     <body>
-        <div class="grid-x grid-margin-x">
-        <a href="/"><h1>${title}</h1></a>
-        <main>${partial}</main></div>
+        <div class="top-bar">
+            <div class="top-bar-left">
+                <ul class="menu">
+                    <a class="button primary" class="button" href="/">Home</a>
+              </ul>
+            </div>
+            <div class="top-bar-right">
+                <ul class="menu">
+                <a type="button" class="button" href="/users/login">Login</a>
+                <a type="button" class="button" href="/users/signup">Sign up</a>
+            </ul>
+            </div>
+          </div>
+        <div class="grid-x">
+        <main class="center">${partial}</main></div>
 
     </body>
 </html>

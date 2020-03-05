@@ -3,40 +3,23 @@ const express = require('express'),
   reviewModel = require('../models/reviewModel');
 
 /* GET home page. */
-router.get('/:id?', async (req, res) => {
-  const { id } = req.params;
-  let dataArray = [], partial = "",
-    reviewArray =[];
-
-  if (!!id) {
-    dataArray = await reviewModel.getOneAlbum(id);
-    partial = "partial-id";
-    reviewArray = await reviewModel.getReviews(id);
-  } else {
-    dataArray = await reviewModel.getAllAlbums();
-    partial = "partial-index";
-  };
+router.get('/', async (req, res) => {
+  let dataArray = [];
+  dataArray = await reviewModel.getAllAlbums();
 
   res.render('template', {
     locals: {
       title: "Home",
-      dataArray: dataArray,
-      reviewArray: reviewArray
+      dataArray: dataArray
     },
     partials: {
-      partial: partial
+      partial: 'partial-home'
     } 
     
 });
 });
 
 
-router.post('/', async (req,res) => {
-  const { user_id, album_id, review_title, review_review } = req.body;
-  const postData = await reviewModel.addReview(user_id, album_id, review_title, review_review)
-  console.log(postData);
-  res.sendStatus(200);
-});
 
 
 

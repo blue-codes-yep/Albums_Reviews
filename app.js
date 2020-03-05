@@ -5,14 +5,16 @@ const express = require('express'),
     es6Renderer = require('express-es6-template-engine');
 
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index'),
+    usersRouter = require('./routes/users'),
+    albumsRouter = require('./routes/albums');
 
 
 var app = express();
 
 app.engine('html', es6Renderer);
-app.set('views','./views');
-app.set('view engine','html');
+app.set('views', './views');
+app.set('view engine', 'html');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -20,6 +22,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/albums', albumsRouter);
 
 
 module.exports = app;
