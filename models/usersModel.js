@@ -12,7 +12,7 @@ class userModel {
     }
 
     checkPassword(hashedPassword) {
-        return bcrypt.compareSync(this.password, hashedPassword);
+        return modbcrypt.compareSync(this.password, hashedPassword);
     }
 
     async addUser() {
