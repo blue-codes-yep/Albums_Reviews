@@ -1,4 +1,6 @@
 const express = require('express'),
+    userModel = require('../models/usersModel'),
+    bcrypt = require('bcryptjs'),
     router = express.Router();
 
 
@@ -30,6 +32,29 @@ router.get('/login', async (req, res) => {
         }
 
     });
+});
+
+router.post('/login', (req,res, next) => {
+    const { user_email, user_password } = req.body;
+
+    const user = new userModel(null, null, null, user_email, user_password);
+    
+    user.loginUser();
+
+    res.sendStatus(200);
+});
+
+router.post('/signup', (req,res, next) => {
+    const { first_name, last_name, user_email, user_password } = req.body;
+
+    
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(user_password, salt);
+    
+
+    const user = new userModel(null, first_name, last_name, user_email, hash);
+    user.addUser();
+    res.status(200).redirect('/');
 });
 
 module.exports = router;

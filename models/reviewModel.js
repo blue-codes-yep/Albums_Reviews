@@ -10,7 +10,7 @@ class reviewModel {
             return response; 
         }
         catch (error) {
-            console.log("ERROR: ", error);
+            console.error("ERROR: ", error);
             return error;
         }
     }
@@ -23,14 +23,14 @@ class reviewModel {
             return response; 
         }
         catch (error) {
-            console.log("ERROR: ", error);
+            console.error("ERROR: ", error);
             return error;
         }
     }
     static async getReviews(id) {
         try {
             const response = await db.any(`
-            SELECT review.stars, albums.name, review.review, review.title,users.name as username FROM albums
+            SELECT review.stars, albums.name, review.review, review.title,users.firstname as username FROM albums
             INNER JOIN review ON albums.id = review.albums_id
             INNER JOIN users ON review.users_id = users.id
             WHERE review.albums_id = ${id};
@@ -38,16 +38,16 @@ class reviewModel {
             return response; 
         }
         catch (error) {
-            console.log("ERROR: ", error);
+            console.error("ERROR: ", error);
             return error;
         }
     }
 
-    static async addReview(user_id, album_id, review_title, review_review, stars) {
+    static async addReview(user_id, album_id, review_title, review_review, star_rating) {
         try {
             const response = await db.one(
                 `INSERT INTO review (users_id, albums_id, title, review, stars) VALUES ($1,$2,$3,$4,$5) RETURNING id`, 
-                [user_id, album_id, review_title, review_review, stars]
+                [user_id, album_id, review_title, review_review, star_rating]
             );
             return response;
         }

@@ -10,7 +10,7 @@ ${dataArray.map(albums => `
 </div>
 `).join("")}
 
-<form action="/" method="POST">
+<form action="/albums" method="POST">
   <input type="hidden" value="1" name="user_id" />
   <input type="hidden" value="${dataArray[0].id}" name="album_id" />
   <label>
@@ -21,9 +21,8 @@ ${dataArray.map(albums => `
     Text:
     <textarea name="review_review" placeholder="Review Text"></textarea>
   </label>
-  <label
-    >Star Rating
-    <select name="starRating">
+  <label>Star Rating
+    <select name="star_rating">
       <option value="1">🌟</option>
       <option value="2">🌟🌟</option>
       <option value="3">🌟🌟🌟</option>
