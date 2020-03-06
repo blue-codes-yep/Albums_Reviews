@@ -34,14 +34,23 @@ router.get('/login', async (req, res) => {
     });
 });
 
-router.post('/login', (req,res, next) => {
+router.post('/login', async (req,res, next) => {
     const { user_email, user_password } = req.body;
 
     const user = new userModel(null, null, null, user_email, user_password);
     
-    user.loginUser();
+    const loginResponse = await user.loginUser();
+    console.log("This is what it is:", loginResponse);
 
-    res.sendStatus(200);
+    if (!!loginResponse.isValid) {
+        req.session.is_logged_in = loginResponse.isValid;
+        req.session.user_id = loginResponse.user_id;
+        req.session.firstname = loginResponse.firstname;
+        req.session.lastname = loginResponse.lastname;
+        res.redirect('/');
+    } else {
+        res.sendStatus(403)
+    }
 });
 
 router.post('/signup', (req,res, next) => {
