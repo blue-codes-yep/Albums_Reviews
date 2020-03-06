@@ -12,7 +12,7 @@ class userModel {
     }
 
     checkPassword(hashedPassword) {
-        return modbcrypt.compareSync(this.password, hashedPassword);
+        return bcrypt.compareSync(this.password, hashedPassword);
     }
 
     async addUser() {
@@ -32,13 +32,17 @@ class userModel {
         try {
             const response = await db.one(`SELECT id, firstname, lastname, password FROM users WHERE email = $1`, [this.user_email]);
             console.log('response', response);
+
             const isValid = this.checkPassword(response.password);
+
             if (!!isValid) {
-                console.log("successful login WOOT", isValid);
+                const { id, firstname, lastname } = response;
+                return { isValid, user_id: id, firstname, lastname };
             } else {
                 console.log("not valid email/password combo", isValid);
             }
-        } catch (error) {
+        } 
+        catch (error) {
             console.error("ERROR: ", error);
             return error;
         }
